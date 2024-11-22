@@ -17,12 +17,32 @@ function App() {
    */
   useEffect(() => {
     // localStorage.setItem("contacts", JSON.stringify(contacts));
+    console.log("tasks have changed");
     console.log(tasks);
   }, [tasks]);
 
-  // Add a new task
+  /**
+   * Add a new task
+   */
   const addTask = (newTask) => {
     setTasks([...tasks, newTask]);
+  };
+
+  /**
+   * Removing Task for button somewhere down the DOM
+   * Going to see if I can just get the task and delete it off the array?
+   * Currently deleting task based on name
+   *   this means the delete function will delete the first task that matches the name
+   *   should be replaced by UID later
+   */
+  const removeTask = (taskToRemove) => {
+    if (typeof taskToRemove === "string") {
+      // for name, this is temp to test function
+      const tIndex = tasks.findIndex((elem) => elem.name === taskToRemove);
+      let newTasks = tasks;
+      newTasks.splice(tIndex, 1);
+      setTasks([...newTasks]);
+    }
   };
 
   return (
