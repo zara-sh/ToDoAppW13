@@ -1,24 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
 
+/**
+ * Using App like main index
+ * place holders while we add the componetents
+ */
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <>
+      <header>
+        <h1>Temp Heading</h1>
       </header>
-    </div>
+      <main>
+        <button>Temp Add Button +</button>
+        <p>Temp Place for tasks</p>
+      </main>
+      <footer>
+        <p>Temp Footer with credits and such</p>
+      </footer>
+    </>
   );
 }
 
