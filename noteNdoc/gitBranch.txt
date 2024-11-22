@@ -1,0 +1,16 @@
+Branch Naming
+	more of guideline than strict rule
+	we wouldn't be reading other people's branch name
+
+new feature
+	feat/{name}-{date}
+		date: month day
+	example: feat/sortButton-1231
+
+update excisting feature
+	updt/{name}-{date}
+	example: updt/indexCss-1120
+
+fix bug
+	fix/{name}-{date}
+	example: fix/brokenGrid-0430
