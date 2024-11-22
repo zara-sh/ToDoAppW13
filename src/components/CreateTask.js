@@ -58,15 +58,15 @@ function CreateTask({ onAddContact }) {
       </div>
       <div>
         <label>Description:</label>
-        <input
+        <br/>
+        <textarea
           type="text"
           name="description"
           value={taskData.description}
           onChange={handleInputChange}
+          cols="60"
+          rows="5"
         />
-      </div>
-      <div>
-        <textarea name="Text1" cols="60" rows="5"></textarea>
       </div>
       <div>
         <label>DueDate:</label>
@@ -99,7 +99,7 @@ function CreateTask({ onAddContact }) {
         </select>
       </div>
       {error && <p className="error-message">{error}</p>}
-      <button type="submit">Add Contact</button>
+      <button type="submit">Add Task</button>
     </form>
   );
 }
