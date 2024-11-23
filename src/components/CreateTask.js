@@ -89,7 +89,7 @@ function CreateTask({ onAddContact }) {
       <div>
         <label>Status:</label>
         <select
-          name="priority"
+          name="status"
           value={taskData.status}
           onChange={handleInputChange}
         >
