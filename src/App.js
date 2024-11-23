@@ -37,7 +37,7 @@ function App() {
   const removeTask = (taskToRemove) => {
     if (typeof taskToRemove === "string") {
       // for name, this is temp to test function
-      const tIndex = tasks.findIndex(({taskName}) => taskName === taskToRemove);
+      const tIndex = tasks.findIndex(({name}) => name === taskToRemove);
       let newTasks = tasks;
       newTasks.splice(tIndex, 1);
       setTasks([...newTasks]);
