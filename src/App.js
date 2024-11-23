@@ -25,6 +25,24 @@ function App() {
     setTasks([...tasks, newTask]);
   };
 
+  /**
+   * Edit Task
+   * currently finds task by name
+   *   should be replaced by find by UID later
+   */
+  const editTask = (editedTask) => {
+    // should be checking if it's a correct object when we have time later
+    if (typeof editedTask === "object") {
+      // finding matching object by task name, this should be replaced with UID later
+      const tIndex = tasks.findIndex(({name}) => name === editedTask.name);
+      // while I'm getting used to findIndex
+      console.log("matching index of ", editedTask.name, "=", tIndex);
+      const newTasks = tasks;
+      newTasks.splice(tIndex, 1, editedTask);
+      setTasks([...newTasks]);
+    }
+  }
+
   return (
     <>
       <header>
