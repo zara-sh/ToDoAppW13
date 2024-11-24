@@ -1,15 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-function CreateTask({ onAddContact }) {
+function CreateTask({ onAddContact, taskToEdit, onEditTask }) {
   const [taskData, setTaskData] = useState({
     name: "",
     description: "",
     dueDate: "",
     assignedTo: "Family",
-    status:"in progress"
+    status: "in progress",
   });
 
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    // If there's a task to edit, pre-fill the form with the task data
+    if (taskToEdit) {
+      setTaskData({
+        name: taskToEdit.name,
+        description: taskToEdit.description,
+        dueDate: taskToEdit.dueDate,
+        assignedTo: taskToEdit.assignedTo,
+        status: taskToEdit.status,
+      });
+    }
+  }, [taskToEdit]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -20,33 +33,34 @@ function CreateTask({ onAddContact }) {
     e.preventDefault();
 
     // Validate inputs
-    if (!taskData.name || !taskData.description || !taskData.dueDate ) {
+    if (!taskData.name || !taskData.description || !taskData.dueDate) {
       setError("All fields are required!");
       return;
     }
 
     setError("");
 
-    // Add a unique ID to the contact
-    const newContact = { ...taskData, id: Date.now() };
+    // If there's a task to edit, update it. Otherwise, create a new task.
+    if (taskToEdit) {
+      onEditTask({ ...taskData, id: taskToEdit.id }); // Edit task
+    } else {
+      const newTask = { ...taskData, id: Date.now() }; // New task
+      onAddContact(newTask);
+    }
 
-    // Pass the contact to the parent component
-    onAddContact(newContact);
-
-    // Reset form
+    // Reset form after submission
     setTaskData({
       name: "",
       description: "",
       dueDate: "",
       assignedTo: "Family",
-      status:"in progress"
-      
+      status: "in progress",
     });
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <h3>Add Contact</h3>
+      <h3>{taskToEdit ? "Edit Task" : "Add Task"}</h3>
       <div>
         <label>Name:</label>
         <input
@@ -58,9 +72,8 @@ function CreateTask({ onAddContact }) {
       </div>
       <div>
         <label>Description:</label>
-        <br/>
+        <br />
         <textarea
-          type="text"
           name="description"
           value={taskData.description}
           onChange={handleInputChange}
@@ -69,7 +82,7 @@ function CreateTask({ onAddContact }) {
         />
       </div>
       <div>
-        <label>DueDate:</label>
+        <label>Due Date:</label>
         <input
           type="date"
           name="dueDate"
@@ -93,13 +106,13 @@ function CreateTask({ onAddContact }) {
           value={taskData.status}
           onChange={handleInputChange}
         >
-          <option value="progress">progress</option>
-          <option value="completed">completed</option>
-          <option value="review">review</option>
+          <option value="in progress">In Progress</option>
+          <option value="completed">Completed</option>
+          <option value="review">Review</option>
         </select>
       </div>
       {error && <p className="error-message">{error}</p>}
-      <button type="submit">Add Task</button>
+      <button type="submit">{taskToEdit ? "Save Changes" : "Add Task"}</button>
     </form>
   );
 }
