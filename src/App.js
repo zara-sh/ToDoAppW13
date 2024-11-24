@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 
 import CreateTask from './components/CreateTask';
 import TaskList from './components/TaskList';
+import MainHeader from './components/MainHeader';
 
 /**
  * Using App like main index
@@ -27,10 +28,8 @@ function App() {
 
   return (
     <>
-      <header>
-        <h1>Temp Heading</h1>
-      </header>
-      <main>
+      <MainHeader />
+      <main id='main'>
         <CreateTask onAddContact={addTask} />
         <TaskList tasks={tasks} />
       </main>
