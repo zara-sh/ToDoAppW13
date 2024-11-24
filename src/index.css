@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+:root {
+  /* replace those with hex code or something later */
+  /* these format cal also be used for other colours, --col-0-light, --col-1-text, etc */
+  --col-main: #7D27F5;
+  --col-main-dark: hsl(from var(--col-main) h s calc(l / 2));
+  --col-main-text: blue;
+  /* hi for hi-light */
+  --col-hi: #E0F0C9;
+  --col-0: #84A0FA;
+  --col-1: #FA64E8;
+}
