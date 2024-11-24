@@ -20,6 +20,7 @@ Order for each element(like .task-list{}, p{}, etc etc)
 		+ border-radius
 	padding
 	box-sizing
+	position
 	size(width, height)
 	background
 		+ background-color and other background things
