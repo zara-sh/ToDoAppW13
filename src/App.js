@@ -27,18 +27,17 @@ function App() {
 
   /**
    * Edit Task
-   * currently finds task by name
-   *   should be replaced by find by UID later
+   * Currently finds task to edit or replace by Date
+   * Only supports task(object) as input
    */
-  const editTask = (editedTask) => {
-    // should be checking if it's a correct object when we have time later
-    if (typeof editedTask === "object") {
-      // finding matching object by task name, this should be replaced with UID later
-      const tIndex = tasks.findIndex(({name}) => name === editedTask.name);
-      // while I'm getting used to findIndex
-      console.log("matching index of ", editedTask.name, "=", tIndex);
+  const editTask = (taskToEdit) => {
+    if (typeof taskToEdit === "object" || typeof taskToEdit === "number") {
+      // only support task object, since we'd need the information to edit
+      console.log("removing task ID:", taskToEdit.id);
+      const tIndex = tasks.findIndex(({id}) => id === taskToEdit.id)
+      // to update tasks
       const newTasks = tasks;
-      newTasks.splice(tIndex, 1, editedTask);
+      newTasks.splice(tIndex, 1, taskToEdit);
       setTasks([...newTasks]);
     }
   }
