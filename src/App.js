@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 
 import CreateTask from './components/CreateTask';
 import TaskList from './components/TaskList';
+import MainHeader from './components/MainHeader';
 
 /**
  * Using App like main index
@@ -29,6 +30,7 @@ function App() {
   };
 
   /**
+
    * Removing Task for button somewhere down the DOM
    * Currently deleting task based Date
    * Supports both Date(number) and task(object)
@@ -51,13 +53,27 @@ function App() {
       setTasks([...newTasks]);
     }
   };
+=======
+   * Edit Task
+   * Currently finds task to edit or replace by Date
+   * Only supports task(object) as input
+   */
+  const editTask = (taskToEdit) => {
+    if (typeof taskToEdit === "object" || typeof taskToEdit === "number") {
+      // only support task object, since we'd need the information to edit
+      console.log("removing task ID:", taskToEdit.id);
+      const tIndex = tasks.findIndex(({id}) => id === taskToEdit.id)
+      // to update tasks
+      const newTasks = tasks;
+      newTasks.splice(tIndex, 1, taskToEdit);
+      setTasks([...newTasks]);
+    }
+  }
 
   return (
     <>
-      <header>
-        <h1>Temp Heading</h1>
-      </header>
-      <main>
+      <MainHeader />
+      <main id='main'>
         <CreateTask onAddContact={addTask} />
         <TaskList tasks={tasks} />
       </main>
