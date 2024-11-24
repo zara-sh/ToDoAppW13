@@ -18,15 +18,42 @@ function App() {
    */
   useEffect(() => {
     // localStorage.setItem("contacts", JSON.stringify(contacts));
+    console.log("tasks have changed");
     console.log(tasks);
   }, [tasks]);
 
-  // Add a new task
+  /**
+   * Add a new task
+   */
   const addTask = (newTask) => {
     setTasks([...tasks, newTask]);
   };
 
   /**
+
+   * Removing Task for button somewhere down the DOM
+   * Currently deleting task based Date
+   * Supports both Date(number) and task(object)
+   */
+  const removeTask = (taskToRemove) => {
+    if (typeof taskToRemove === "object" || typeof taskToRemove === "number") {
+    console.log("type of id: ", typeof taskToRemove.id);
+      let tIndex = 0;
+      // get the index for event to remove, supports number and task object
+      if (typeof taskToRemove === "object") {
+        console.log("removing task id:", taskToRemove.id);
+        tIndex = tasks.findIndex(({id}) => id === taskToRemove.id);
+      } else {
+        console.log("removing task id:", taskToRemove);
+        tIndex = tasks.findIndex(({id}) => id === taskToRemove);
+      }
+      // for name, this is temp to test function
+      let newTasks = tasks;
+      newTasks.splice(tIndex, 1);
+      setTasks([...newTasks]);
+    }
+  };
+=======
    * Edit Task
    * Currently finds task to edit or replace by Date
    * Only supports task(object) as input
