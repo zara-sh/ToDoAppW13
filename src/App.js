@@ -26,6 +26,23 @@ function App() {
     setTasks([...tasks, newTask]);
   };
 
+  /**
+   * Edit Task
+   * Currently finds task to edit or replace by Date
+   * Only supports task(object) as input
+   */
+  const editTask = (taskToEdit) => {
+    if (typeof taskToEdit === "object" || typeof taskToEdit === "number") {
+      // only support task object, since we'd need the information to edit
+      console.log("removing task ID:", taskToEdit.id);
+      const tIndex = tasks.findIndex(({id}) => id === taskToEdit.id)
+      // to update tasks
+      const newTasks = tasks;
+      newTasks.splice(tIndex, 1, taskToEdit);
+      setTasks([...newTasks]);
+    }
+  }
+
   return (
     <>
       <MainHeader />
