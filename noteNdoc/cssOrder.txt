@@ -1,0 +1,55 @@
+CSS Element placement order
+	more of guideline than strict rule
+		priorities getting it working and commenting/describing things that needs describing first.
+		we'll clean up the CSS if we have time
+	just to help reduce time for us to look at other people's css
+	Feel free to change or open discussion
+
+Notes
+	try and use rem and em instead of px
+
+Order for each element(like .task-list{}, p{}, etc etc)
+		related to parent elements
+	flex
+	grid-area
+	order
+	
+		affects itself
+	margin
+	border
+		+ border-radius
+	padding
+	box-sizing
+	size(width, height)
+	background
+		+ background-color and other background things
+	z-index
+		not sure whether to place this here or with flex and grid-area
+	
+		affects child elements (mostly)
+	display: {block, inline-block, none, flex, grid}
+	{setting for flex, grid, and other related}
+	(text/item/content)-(align/justify)
+
+example1:
+.main div {
+	flex: 3;
+
+	margin: 0;
+	border-radius: 2em;
+	background-color: var(--col-primary, "yellow");
+
+	display: inline-block;
+	text-align: center;
+}
+
+example2:
+.newTask {
+	border: 0.2em dash var(--col-hilight, yellow);
+	padding: 0.1em;
+	box-sizing: border-box;
+
+	display: grid;
+	grid-template-columns: 1fr 10em auto;
+	gap: 0.1em;
+}
