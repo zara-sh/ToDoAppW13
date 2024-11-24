@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import CreateTask from './components/CreateTask';
 import TaskList from './components/TaskList';
 import MainHeader from './components/MainHeader';
+import MainFooter from './components/MainFooter';
 
 /**
  * Using App like main index
@@ -77,9 +78,7 @@ function App() {
         <CreateTask onAddContact={addTask} />
         <TaskList tasks={tasks} />
       </main>
-      <footer>
-        <p>Temp Footer with credits and such</p>
-      </footer>
+      <MainFooter />
     </>
   );
 }
