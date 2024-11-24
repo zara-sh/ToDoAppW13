@@ -2,15 +2,20 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import CreateTask from './components/CreateTask';
 import TaskList from './components/TaskList';
+import MainHeader from './components/MainHeader';
 
 function App() {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
+    // localStorage.setItem("contacts", JSON.stringify(contacts));
     console.log("tasks have changed");
     console.log(tasks);
   }, [tasks]);
 
+  /**
+   * Add a new task
+   */
   const addTask = (newTask) => {
     setTasks([...tasks, newTask]);
   };
