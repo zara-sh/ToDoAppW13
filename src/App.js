@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import CreateTask from './components/CreateTask';
 import TaskList from './components/TaskList';
 import MainHeader from './components/MainHeader';
+import MainFooter from './components/MainFooter';
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -41,9 +42,7 @@ function App() {
         <CreateTask onAddContact={addTask} />
         <TaskList tasks={tasks} onEditTask={editTask} onRemoveTask={removeTask} />
       </main>
-      <footer>
-        <p>Temp Footer with credits and such</p>
-      </footer>
+      <MainFooter />
     </>
   );
 }
