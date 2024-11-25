@@ -25,6 +25,17 @@ const TaskList = ({ tasks, onEditTask, onRemoveTask }) => {
     }));
   };
 
+  // handle change immediatly
+  const handleInputChange_immediate = (dom, task) => {
+    const { name, value } = dom.target;
+    task = {
+      ...task,
+      [name]: value
+    }
+    // console.log(task);
+    onEditTask(task);
+  }
+
   // Function to save the edited task
   const handleSave = (task) => {
     const updatedTask = {
@@ -64,7 +75,20 @@ const TaskList = ({ tasks, onEditTask, onRemoveTask }) => {
             // Otherwise, display task details and Edit/Remove buttons
             <div>
               <h3>{task.name}</h3>
-              <p>{task.description}</p>
+              <h5>Due by: {task.dueDate}</h5>
+              <p>Assigned to: {task.assignedTo}</p>
+              <p>Status:
+                <select
+                  name="status"
+                  value={task.status}
+                  onChange={(dom) => {handleInputChange_immediate(dom, task)}}
+                >
+                  <option value="in progress">In Progress</option>
+                  <option value="completed">Completed</option>
+                  <option value="review">Review</option>
+                </select>
+              </p>
+              <p>Description:<br />{task.description}</p>
               <button onClick={() => startEditing(task)}>Edit</button>
               <button onClick={() => onRemoveTask(task)}>Delete</button>
             </div>
