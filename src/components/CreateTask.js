@@ -4,7 +4,7 @@ function CreateTask({ onAddContact, taskToEdit, onEditTask }) {
   const [taskData, setTaskData] = useState({
     name: "",
     description: "",
-    dueDate: "",
+    dueDate: getDefaultDateISO(),
     assignedTo: "Family",
     status: "in progress",
   });
@@ -66,11 +66,20 @@ function CreateTask({ onAddContact, taskToEdit, onEditTask }) {
     setTaskData({
       name: "",
       description: "",
-      dueDate: "",
+      dueDate: getDefaultDateISO(),
       assignedTo: "Family",
       status: "in progress",
     });
   };
+
+  // gets default due date so we don't have to manually set it each time
+  function getDefaultDateISO() {
+    let defaultDate = new Date();
+    // I think it rounds down? or default date is different time zone?, adding a day just to be safe
+    // not sure what will happen when it's the last day of the month tho, might break
+    defaultDate.setDate(defaultDate.getDate() + 1);
+    return defaultDate.toISOString().substring(0,10);
+  }
 
   return (
     <form onSubmit={handleSubmit}>
