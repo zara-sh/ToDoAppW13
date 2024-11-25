@@ -29,21 +29,17 @@ function CreateTask({ onAddContact, taskToEdit, onEditTask }) {
     setTaskData({ ...taskData, [name]: value });
   };
 
-  //validate description length
-  useEffect(() => {
-    if (taskData.description.length < 5) {
-      setError("Description must be at least 5 characters long.");
-    } else {
-      setError("");
-    }
-  }, [taskData.description]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Validate inputs
     if (!taskData.name || !taskData.description || !taskData.dueDate) {
       setError("All fields are required!");
+      return;
+    }
+
+    if (taskData.description.length < 5) {
+      setError("Description must be at least 5 characters long.");
       return;
     }
 
