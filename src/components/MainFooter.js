@@ -1,7 +1,9 @@
+import './MainFooter.css';
+
 export default function MainFooter() {
 	return (
 		<footer id="footer">
-			<div>LOGO</div>
+			{/* <div>LOGO</div> */}
 			<div id="footer-credit">
 				<p>Made by</p>
 				<ul>
