@@ -29,12 +29,30 @@ function CreateTask({ onAddContact, taskToEdit, onEditTask }) {
     setTaskData({ ...taskData, [name]: value });
   };
 
+  //validate description length
+  useEffect(() => {
+    if (taskData.description.length < 5) {
+      setError("Description must be at least 5 characters long.");
+    } else {
+      setError("");
+    }
+  }, [taskData.description]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Validate inputs
     if (!taskData.name || !taskData.description || !taskData.dueDate) {
       setError("All fields are required!");
+      return;
+    }
+
+    const dueDate = new Date(taskData.dueDate);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Set time to midnight to compare only dates
+
+    if (isNaN(dueDate.getTime()) || dueDate < today) {
+      setError("Due date must be a valid date and not in the past.");
       return;
     }
 
