@@ -1,0 +1,10 @@
+Dumping replaced working code here for reference
+
+** From CreateTask.js **
+  useEffect(() => {
+    if (taskData.description.length < 5) {
+      setError("Description must be at least 5 characters long.");
+    } else {
+      setError("");
+    }
+  }, [taskData.description]);
