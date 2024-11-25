@@ -8,14 +8,24 @@ import './components/icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(loadTasks());
   const [sortCriteria, setSortCriteria] = useState("");
-
+  
   useEffect(() => {
-    // localStorage.setItem("contacts", JSON.stringify(contacts));
+    localStorage.setItem("tasks", JSON.stringify(tasks));
     console.log("tasks have changed");
     console.log(tasks);
   }, [tasks]);
+
+  /**
+   * load tasks from local storage
+   * not using arrow function to use on above line and keep this function next to useEffect
+   */
+  function loadTasks() {
+    console.log("loading tasks from local storage");
+    return JSON.parse(localStorage.getItem("tasks"))
+  }
+
 
   /**
    * Add a new task
