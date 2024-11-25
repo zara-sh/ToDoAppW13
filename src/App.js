@@ -37,7 +37,7 @@ function App() {
 
   return (
     <>
-    
+      <MainHeader />
       <main id="main">
         <CreateTask onAddContact={addTask} />
         <TaskList tasks={tasks} onEditTask={editTask} onRemoveTask={removeTask} />
