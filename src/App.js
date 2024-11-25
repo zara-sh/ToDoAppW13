@@ -4,6 +4,8 @@ import CreateTask from './components/CreateTask';
 import TaskList from './components/TaskList';
 import MainHeader from './components/MainHeader';
 import MainFooter from './components/MainFooter';
+import './components/icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -67,13 +69,14 @@ function App() {
           <option value="dueDate">Due Date</option>
         </select>
       </div>
-
+      <FontAwesomeIcon icon="fa-solid fa-face-smile" />// just to check fontawesome is working 
 
       <main id="main">
         <CreateTask onAddContact={addTask} />
         <TaskList tasks={tasks} onEditTask={editTask} onRemoveTask={removeTask} />
       </main>
       <MainFooter />
+      
     </>
   );
 }
