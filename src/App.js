@@ -31,6 +31,13 @@ function App() {
     setTasks(newTasks);
   };
 
+  const removeTask_all = () => {
+    // confirm alert
+    if (window.confirm("delete all tasks?")) {
+      setTasks([]);
+    }
+  }
+
   const editTask = (taskToEdit) => {
     const tIndex = tasks.findIndex(({ id }) => id === taskToEdit.id);
     const newTasks = [...tasks];
@@ -53,6 +60,9 @@ function App() {
   return (
     <>
       <MainHeader />
+
+      {/* temp reset button, move to where it's needed */}
+      <button onClick={removeTask_all}>reset</button>
 
       <div className="sort-controls">
         <label htmlFor="sort">Sort By:</label>
