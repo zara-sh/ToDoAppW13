@@ -1,8 +1,12 @@
+import './MainHeader.css';
+
 export default function MainHeader() {
 	return (
 		<header id='header'>
 			<div id="header-display">
-				<div>Pretend this is a logo</div>
+				<div className='logo'>
+					<div>TT</div>
+				</div>
 				<h1>Temp Heading</h1>
 			</div>
 			<nav id="header-nav">
