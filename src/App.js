@@ -32,7 +32,10 @@ function App() {
   };
 
   const removeTask_all = () => {
-    setTasks([]);
+    // confirm alert
+    if (window.confirm("delete all tasks?")) {
+      setTasks([]);
+    }
   }
 
   const editTask = (taskToEdit) => {
