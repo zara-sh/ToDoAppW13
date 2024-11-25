@@ -51,6 +51,7 @@ function App() {
   return (
     <>
       <MainHeader />
+
       <div className="sort-controls">
         <label htmlFor="sort">Sort By:</label>
         <select
@@ -66,6 +67,8 @@ function App() {
           <option value="dueDate">Due Date</option>
         </select>
       </div>
+
+
       <main id="main">
         <CreateTask onAddContact={addTask} />
         <TaskList tasks={tasks} onEditTask={editTask} onRemoveTask={removeTask} />
