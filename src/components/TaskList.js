@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const TaskList = ({ tasks, onEditTask, onRemoveTask }) => {
   const [editingTask, setEditingTask] = useState(null);  // State to track the task being edited
@@ -6,6 +6,12 @@ const TaskList = ({ tasks, onEditTask, onRemoveTask }) => {
     name: "",
     description: "",
   });
+  const [error, setError] = useState("");
+
+  // reset error message on editor opening & closing
+  useEffect(() => {
+    setError("");
+  }, [editingTask]);
 
   // Function to start editing a task
   const startEditing = (task) => {
@@ -13,6 +19,10 @@ const TaskList = ({ tasks, onEditTask, onRemoveTask }) => {
     setEditValues({
       name: task.name,
       description: task.description,
+      dueDate: task.dueDate,
+      // minimum date for validation later
+      MINDATE: task.dueDate,
+      assignedTo: task.assignedTo,
     });
   };
 
@@ -38,10 +48,43 @@ const TaskList = ({ tasks, onEditTask, onRemoveTask }) => {
 
   // Function to save the edited task
   const handleSave = (task) => {
+    /**
+     * put data validation here
+     * mostly copied from CreateTask
+     * starting to think this should be a separate function
+     */
+    if (!editValues.name || !editValues.description || !editValues.dueDate) {
+      setError("All fields are required!");
+      return;
+    }
+
+    if (editValues.description.length < 5) {
+      setError("description too short");
+      return;
+    }
+
+    const dDate = new Date(editValues.dueDate);
+    const minDate = new Date(editValues.MINDATE);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Set time to midnight to compare only dates
+
+    // failing fast for NaN
+    if (isNaN(dDate.getTime())) {
+      setError("Due date must be a valid date");
+      return;
+    }
+    // compare with today or last due date
+    if (dDate < minDate && dDate < today) {
+      setError("Due date must be after today or last due date");
+      return;
+    }
+
     const updatedTask = {
       ...task,
       name: editValues.name,
       description: editValues.description,
+      dueDate: editValues.dueDate,
+      assignedTo: editValues.assignedTo,
     };
     onEditTask(updatedTask);  // Call onEditTask to update the task in the list
     setEditingTask(null);      // Close the edit form
@@ -54,20 +97,35 @@ const TaskList = ({ tasks, onEditTask, onRemoveTask }) => {
           {editingTask === task.id ? (
             // If the task is being edited, show an input form
             <div>
-              <input
+              <span>Task Name: </span><input
                 type="text"
                 name="name"
                 value={editValues.name}
                 onChange={handleInputChange}
                 placeholder="Task Name"
-              />
-              <input
+              /><br />
+              <span>Description: </span><br /><textarea
                 type="text"
                 name="description"
                 value={editValues.description}
                 onChange={handleInputChange}
                 placeholder="Task Description"
-              />
+                cols="60"
+                rows="5"
+              /><br />
+              <span>Due Date: </span><input
+                type="date"
+                name="dueDate"
+                value={editValues.dueDate}
+                onChange={handleInputChange}
+              /><br />
+              <span>Assigned To: </span><input 
+                type="text"
+                name="assignedTo"
+                value={editValues.assignedTo}
+                onChange={handleInputChange}
+              /><br />
+              {error && <p className="error-message">{error}</p>}
               <button onClick={() => handleSave(task)}>Save</button>
               <button onClick={() => setEditingTask(null)}>Cancel</button>
             </div>
