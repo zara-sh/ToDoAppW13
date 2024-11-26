@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const TaskList = ({ tasks, onEditTask, onRemoveTask }) => {
   const [editingTask, setEditingTask] = useState(null);  // State to track the task being edited
@@ -6,6 +6,12 @@ const TaskList = ({ tasks, onEditTask, onRemoveTask }) => {
     name: "",
     description: "",
   });
+  const [error, setError] = useState("");
+
+  // reset error message on editor opening & closing
+  useEffect(() => {
+    setError("");
+  }, [editingTask]);
 
   // Function to start editing a task
   const startEditing = (task) => {
@@ -42,7 +48,36 @@ const TaskList = ({ tasks, onEditTask, onRemoveTask }) => {
 
   // Function to save the edited task
   const handleSave = (task) => {
-    // put data validation here
+    /**
+     * put data validation here
+     * mostly copied from CreateTask
+     * starting to think this should be a separate function
+     */
+    if (!editValues.name || !editValues.description || !editValues.dueDate) {
+      setError("All fields are required!");
+      return;
+    }
+
+    if (editValues.description.length < 5) {
+      setError("description too short");
+      return;
+    }
+
+    const dDate = new Date(editValues.dueDate);
+    const minDate = new Date(editValues.MINDATE);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Set time to midnight to compare only dates
+
+    // failing fast for NaN
+    if (isNaN(dDate.getTime())) {
+      setError("Due date must be a valid date");
+      return;
+    }
+    // compare with today or last due date
+    if (dDate < minDate && dDate < today) {
+      setError("Due date must be after today or last due date");
+      return;
+    }
 
     const updatedTask = {
       ...task,
@@ -89,8 +124,8 @@ const TaskList = ({ tasks, onEditTask, onRemoveTask }) => {
                 name="assignedTo"
                 value={editValues.assignedTo}
                 onChange={handleInputChange}
-              />
-              <br />
+              /><br />
+              {error && <p className="error-message">{error}</p>}
               <button onClick={() => handleSave(task)}>Save</button>
               <button onClick={() => setEditingTask(null)}>Cancel</button>
             </div>
