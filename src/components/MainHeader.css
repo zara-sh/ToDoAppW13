@@ -1,108 +1,116 @@
 
 #header {
-	padding: 1em 1em;
+	padding: 1em 1em 0 1em;
 	/* padding-bottom: 0; */
-
+	border: 0;
 	width: 100vw;
 	box-sizing: border-box;
 	background: #F5FAFF; 
 
 	display: flex;
 	flex-flow: column;
-	border-bottom: 1px solid black
-}
-
-#header-display {
-	/* margin-bottom: 1em; */
-	/* border-radius: 1em; */
-	position: relative;
-
-	display: flex;
-	align-items: center;
-	justify-content: center; /* Center content horizontally */
-	color: #111111; /* Text color */
-}
-
-.logo {
-	position: absolute; 
-	/* top: 0.01em;  */
-	left: 0.1em; 
-
-	height: 6em; 
-	width: 6em;
-
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-.logo img {
-    height: 50px;  
-    width: auto;
-}
-
-#App-name {
-	text-align: center;
-	font-size: 2.3rem; 
-	line-height: 1.8;
-	font-weight: bold;
-}
-
-#header-text{
-	text-align: center;
-	font-size: 1.5rem; 
-	line-height: 1.8;
+	border-bottom: 1px solid black;
+	h1{
+		margin: 0;
+	}
+	#header-display {
+		/* margin-bottom: 1em; */
+		/* border-radius: 1em; */
+		position: relative;
 	
-}
-
-#header-nav {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 0
-}
-
-#header-nav div {
-	display: flex;
-	gap: 1.5em; 
-}
-
-button {
-	padding: 0.5em 1em; 
-	font-size: 1rem; 
-	border: none;
-	border-radius: 0.5em;
-	cursor: pointer;
-}
-
-button:nth-of-type(1) { /* Create New Task button */
-	background: #1FC0FD;
-	color: white;
-}
-
-button:nth-of-type(2) { /* Task List button */
-	background: #1FC0FD;
-	color: white;
-}
-
-ul {
-	list-style: none;
-	display: flex;
-	gap: 1em;
-
-	li {
-		padding: 0.3em;
-		border-radius: 0.25em;
-		min-width: 3em;
-		background: lightgray;
-
+		display: flex;
+		align-items: center;
+		justify-content: center; /* Center content horizontally */
+		color: #111111; /* Text color */
+	}
+	.logo {
+		position: absolute; 
+		/* top: 0.01em;  */
+		left: 0.1em; 
+	
+		/* height: 6em; 
+		width: 6em; */
+	
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.logo img {
+		height: 50px;  
+		width: auto;
+	}
+	
+	#App-name {
 		text-align: center;
-
-		a {
-			text-decoration: none;
-			color: black;
-		}
-		a:hover {
-			color: darkgray;
+		font-size: 2.3rem; 
+		line-height: 1.8;
+		font-weight: bold;
+	}
+	
+	#header-text{
+		text-align: center;
+		font-size: 1.5rem; 
+		line-height: 1.8;
+		
+	}
+	
+	#header-nav {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin: 0;
+		padding: 0;
+	}
+	
+	#header-nav div {
+		display: flex;
+		gap: 1.5em; 
+		padding: 0;
+	}
+	
+	button {
+		padding: 0.5em 1em; 
+		font-size: 1rem; 
+		border: none;
+		border-radius: 0.5em;
+		cursor: pointer;
+	}
+	
+	button:nth-of-type(1) { /* Create New Task button */
+		background: #1FC0FD;
+		color: white;
+	}
+	
+	button:nth-of-type(2) { /* Task List button */
+		background: #1FC0FD;
+		color: white;
+	}
+	
+	ul {
+		list-style: none;
+		display: flex;
+		gap: 1em;
+		margin: 0;
+	
+		li {
+			padding: 0.3em;
+			border-radius: 0.25em;
+			min-width: 3em;
+			background: lightgray;
+	
+			text-align: center;
+	
+			a {
+				text-decoration: none;
+				color: black;
+			}
+			a:hover {
+				color: darkgray;
+			}
 		}
 	}
 }
+
+
+
+
