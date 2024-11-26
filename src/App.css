@@ -1,3 +1,58 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  color: #4a4a4a;
+}
+
+/* task list css */
+
+form {
+  padding: 20px;
+  max-width: 600px;
+}
+
+h3 {
+  margin-top: 0;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="date"],
+textarea,
+select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.error-message {
+  color: #da0c4a;
+  font-weight: bold;
+}
+
+button[type="submit"] {
+  background-color: #0c4ada;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+  margin-top: 20px;
+}
+
+button:hover[type="submit"] {
+  background-color: #0a3c86;
+}
+
 .App {
   text-align: center;
 }
