@@ -9,7 +9,7 @@ function CreateTask({ onAddContact, taskToEdit, onEditTask }) {
     status: "in progress",
   });
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState([]);
 
   useEffect(() => {
     // If there's a task to edit, pre-fill the form with the task data
@@ -32,27 +32,47 @@ function CreateTask({ onAddContact, taskToEdit, onEditTask }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // prep to collect error
+    let errorAry = [];
+
     // Validate inputs
-    if (!taskData.name || !taskData.description || !taskData.dueDate) {
-      setError("All fields are required!");
-      return;
+    if (!taskData.name) {
+      errorAry.push("Task name must be set.");
     }
 
-    if (taskData.description.length < 5) {
-      setError("Description must be at least 5 characters long.");
-      return;
+    if (!taskData.description || taskData.description.length < 5) {
+      errorAry.push("Description must be at least 5 characters long.");
     }
 
     const dueDate = new Date(taskData.dueDate);
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Set time to midnight to compare only dates
 
-    if (isNaN(dueDate.getTime()) || dueDate < today) {
-      setError("Due date must be a valid date and not in the past.");
-      return;
+    if (!taskData.dueDate) {
+      // not sure if this will ever trigger, including it just to be safe
+      errorAry.push("Due date must be set");
+    } else if (isNaN(dueDate.getTime()) || dueDate < today) {
+      errorAry.push("Due date must be a valid date and not in the past.");
+
     }
 
-    setError("");
+    /**
+     * optional setting to check for assignedTo,
+     * maybe we can even make it default to "Me" if there's no value
+     */
+    // if (!taskData.assignedTo) {
+    //   errorAry.push("Task should be assigned to someone");
+    // }
+
+    // check if there's any error
+    if (errorAry.length > 0) {
+      // console.log(errorAry);
+      setError(errorAry);
+      return;
+    } else {
+      // clear otherwise, it might clear after value is set, but just to be safe
+      setError([]);
+    }
 
     // If there's a task to edit, update it. Otherwise, create a new task.
     if (taskToEdit) {
@@ -134,7 +154,12 @@ function CreateTask({ onAddContact, taskToEdit, onEditTask }) {
           <option value="review">Review</option>
         </select>
       </div>
-      {error && <p className="error-message">{error}</p>}
+      {/* {error && <p className="error-message">{error}</p>} */}
+      {error ? 
+        <ul>
+          {error.map((msg, i) => (<li key={`ctError${i}`}>{msg}</li>))}
+        </ul>
+        : null}
       <button type="submit">{taskToEdit ? "Save Changes" : "Add Task"}</button>
     </form>
   );
