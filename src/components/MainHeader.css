@@ -1,94 +1,108 @@
+
 #header {
-	padding: 1em 2em;
-	padding-bottom: 0;
+	padding: 1em 1em;
+	/* padding-bottom: 0; */
 
 	width: 100vw;
 	box-sizing: border-box;
-	background: grey;
+	background: #F5FAFF; 
 
 	display: flex;
 	flex-flow: column;
+	border-bottom: 1px solid black
+}
 
-	#header-display {
-		margin-bottom: 1em;
-		border-radius: 1em;
-		position: relative;
-		background: var(--col-main, brown);
+#header-display {
+	/* margin-bottom: 1em; */
+	/* border-radius: 1em; */
+	position: relative;
 
-		display: flex;
-		justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center; /* Center content horizontally */
+	color: #111111; /* Text color */
+}
 
-		.logo {
-			margin: auto 0;
-			position: relative;
-			/* top: 1em; */
-			/* left: 0; */
-			height: 5em;
-			/* h1 need it to be same value, use rem or other global constant(?) */
-			width: 6rem;
+.logo {
+	position: absolute; 
+	/* top: 0.01em;  */
+	left: 0.1em; 
 
-			align-content: center;
-			justify-content: center;
+	height: 6em; 
+	width: 6em;
 
-			div {
-				/* margin: auto; */
-				position: relative;
-				left: 1em;
-				border-radius: 50%;
-				background: red;
-				height: 3em;
-				width: 3em;
-			}
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.logo img {
+    height: 50px;  
+    width: auto;
+}
+
+#App-name {
+	text-align: center;
+	font-size: 2.3rem; 
+	line-height: 1.8;
+	font-weight: bold;
+}
+
+#header-text{
+	text-align: center;
+	font-size: 1.5rem; 
+	line-height: 1.8;
+	
+}
+
+#header-nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 0
+}
+
+#header-nav div {
+	display: flex;
+	gap: 1.5em; 
+}
+
+button {
+	padding: 0.5em 1em; 
+	font-size: 1rem; 
+	border: none;
+	border-radius: 0.5em;
+	cursor: pointer;
+}
+
+button:nth-of-type(1) { /* Create New Task button */
+	background: #1FC0FD;
+	color: white;
+}
+
+button:nth-of-type(2) { /* Task List button */
+	background: #1FC0FD;
+	color: white;
+}
+
+ul {
+	list-style: none;
+	display: flex;
+	gap: 1em;
+
+	li {
+		padding: 0.3em;
+		border-radius: 0.25em;
+		min-width: 3em;
+		background: lightgray;
+
+		text-align: center;
+
+		a {
+			text-decoration: none;
+			color: black;
 		}
-
-		h1 {
-			margin: 0.5em 0;
-			/* match logo width and use rem */
-			margin-right: 6rem;
-			position: relative;
-			width: 100%;
-			/* height: 1em; */
-
-			text-align: center;
+		a:hover {
+			color: darkgray;
 		}
-	}
-
-	nav {
-		display: flex;
-		justify-content: space-between;
-	}
-
-	ul {
-		list-style: none;
-
-		display: flex;
-		gap: 1em;
-
-		li {
-			padding: 0.3em;
-			border-radius: 0.25em;
-			min-width: 3em;
-			background: lightgray;
-
-			text-align: center;
-
-			a {
-				text-decoration: none;
-				color: var(--col-main-text, black);
-			}
-			a:hover {
-				color: hsl(from var(--col-main-text, black) h s calc(l + 30));
-			}
-		}
-	}
-
-	button {
-		padding: 0.2em 0.5em;
-		border: 0;
-		border-radius: 0.5em 0.5em 0 0;
-	}
-	/* change to formular later */
-	button:nth-of-type(1) {
-		background: var(--col-1, lightblue);
 	}
 }
