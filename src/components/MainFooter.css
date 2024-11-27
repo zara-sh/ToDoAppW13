@@ -1,6 +1,5 @@
 #footer {
 	padding: 1.5em 0;
-
 	background:#0c4ada;
 	color: var(--col-main-dark-text, white);
 
@@ -25,3 +24,11 @@
 		justify-content: center;
 	}
 }
+  
+#footer-credit ul li:not(:last-child)::after {
+	content: "|"; /* Add pipe separator */
+	margin-left: 0.5em; /* Space after the item */
+	color: var(--col-main-dark-text, white);
+  }
+  
+  
