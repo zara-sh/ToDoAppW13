@@ -71,6 +71,7 @@ function App() {
   };
 
   const handleDisplayComp = (val) => {
+    console.log(displayComp,"clickhandle")
     setDisplayComp(val);
   }
 
@@ -88,7 +89,7 @@ function App() {
 
   return (
     <>
-      <MainHeader />
+      <MainHeader dis={handleDisplayComp}  />
 
       {/* temp reset button, move to where it's needed */}
       <button onClick={removeTask_all}>reset</button>
@@ -108,7 +109,7 @@ function App() {
           <option value="dueDate">Due Date</option>
         </select>
       </div>
-      <FontAwesomeIcon icon="fa-solid fa-face-smile" />// just to check fontawesome is working 
+      {/* <FontAwesomeIcon icon="fa-solid fa-face-smile" />// just to check fontawesome is working  */}
 
       <main id="main">
         {handleDisplay()}
