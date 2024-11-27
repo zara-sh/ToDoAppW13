@@ -1,0 +1,27 @@
+#footer {
+	padding: 1.5em 0;
+
+	background: var(--col-main-dark, darkblue);
+	color: var(--col-main-dark-text, white);
+
+	#footer-credit {
+		display: grid;
+		justify-content: center;
+		gap: 1em;
+
+		p {
+			margin: 0;
+			text-align: center;
+		}
+	}
+
+	ul {
+		margin: 0;
+		padding: 0;
+
+		list-style: none;
+		display: flex;
+		gap: 1em;
+		justify-content: center;
+	}
+}

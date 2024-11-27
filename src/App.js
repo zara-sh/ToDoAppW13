@@ -8,14 +8,27 @@ import './components/icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(loadTasks());
   const [sortCriteria, setSortCriteria] = useState("");
-
+  // using string to choose which component to display on App
+  // not the best solution, but no time
+  const [displayComp, setDisplayComp] = useState("createTask");
+  
   useEffect(() => {
-    // localStorage.setItem("contacts", JSON.stringify(contacts));
+    localStorage.setItem("tasks", JSON.stringify(tasks));
     console.log("tasks have changed");
     console.log(tasks);
   }, [tasks]);
+
+  /**
+   * load tasks from local storage
+   * not using arrow function to use on above line and keep this function next to useEffect
+   */
+  function loadTasks() {
+    console.log("loading tasks from local storage");
+    return JSON.parse(localStorage.getItem("tasks"))
+  }
+
 
   /**
    * Add a new task
@@ -30,6 +43,13 @@ function App() {
     newTasks.splice(tIndex, 1);
     setTasks(newTasks);
   };
+
+  const removeTask_all = () => {
+    // confirm alert
+    if (window.confirm("delete all tasks?")) {
+      setTasks([]);
+    }
+  }
 
   const editTask = (taskToEdit) => {
     const tIndex = tasks.findIndex(({ id }) => id === taskToEdit.id);
@@ -50,9 +70,28 @@ function App() {
     setTasks(sortedTasks);
   };
 
+  const handleDisplayComp = (val) => {
+    setDisplayComp(val);
+  }
+
+  const handleDisplay = () => {
+    console.log(displayComp)
+      switch (displayComp) {
+        case 'createTask':
+          return <CreateTask onAddContact={addTask} />;
+        case 'taskList':
+          return <TaskList tasks={tasks} onEditTask={editTask} onRemoveTask={removeTask} />;
+        default:
+          return null;
+      }
+  }
+
   return (
     <>
       <MainHeader />
+
+      {/* temp reset button, move to where it's needed */}
+      <button onClick={removeTask_all}>reset</button>
 
       <div className="sort-controls">
         <label htmlFor="sort">Sort By:</label>
@@ -72,8 +111,7 @@ function App() {
       <FontAwesomeIcon icon="fa-solid fa-face-smile" />// just to check fontawesome is working 
 
       <main id="main">
-        <CreateTask onAddContact={addTask} />
-        <TaskList tasks={tasks} onEditTask={editTask} onRemoveTask={removeTask} />
+        {handleDisplay()}
       </main>
       <MainFooter />
       
