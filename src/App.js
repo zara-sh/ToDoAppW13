@@ -10,6 +10,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function App() {
   const [tasks, setTasks] = useState(loadTasks());
   const [sortCriteria, setSortCriteria] = useState("");
+  // using string to choose which component to display on App
+  // not the best solution, but no time
+  const [displayComp, setDisplayComp] = useState("createTask");
   
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -67,6 +70,22 @@ function App() {
     setTasks(sortedTasks);
   };
 
+  const handleDisplayComp = (val) => {
+    setDisplayComp(val);
+  }
+
+  const handleDisplay = () => {
+    console.log(displayComp)
+      switch (displayComp) {
+        case 'createTask':
+          return <CreateTask onAddContact={addTask} />;
+        case 'taskList':
+          return <TaskList tasks={tasks} onEditTask={editTask} onRemoveTask={removeTask} />;
+        default:
+          return null;
+      }
+  }
+
   return (
     <>
       <MainHeader />
@@ -92,8 +111,7 @@ function App() {
       <FontAwesomeIcon icon="fa-solid fa-face-smile" />// just to check fontawesome is working 
 
       <main id="main">
-        <CreateTask onAddContact={addTask} />
-        <TaskList tasks={tasks} onEditTask={editTask} onRemoveTask={removeTask} />
+        {handleDisplay()}
       </main>
       <MainFooter />
       
