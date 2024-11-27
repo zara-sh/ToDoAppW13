@@ -54,7 +54,7 @@ button:hover[type="submit"] {
   background-color: #0a3c86;
 }
 
-button[type="removeTask_all"] {
+#resetBtn {
   background-color: #fff;
   color: #4a4a4a;
   padding: 10px 15px;

@@ -83,7 +83,7 @@ function App() {
         case 'taskList':
           return (
             <>
-            <button onClick={removeTask_all}>reset</button>
+            <button id='resetBtn' onClick={removeTask_all}>reset</button>
       
             <div className="sort-controls">
               <label htmlFor="sort">Sort By:</label>
