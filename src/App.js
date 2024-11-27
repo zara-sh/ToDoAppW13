@@ -1,16 +1,16 @@
-import './App.css';
-import { useState, useEffect } from 'react';
-import CreateTask from './components/CreateTask';
-import TaskList from './components/TaskList';
-import MainHeader from './components/MainHeader';
-import MainFooter from './components/MainFooter';
-import './components/icons';
+import "./App.css";
+import { useState, useEffect } from "react";
+import CreateTask from "./components/CreateTask";
+import TaskList from "./components/TaskList";
+import MainHeader from "./components/MainHeader";
+import MainFooter from "./components/MainFooter";
+import "./components/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function App() {
   const [tasks, setTasks] = useState(loadTasks());
   const [sortCriteria, setSortCriteria] = useState("");
-  
+
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
     console.log("tasks have changed");
@@ -23,9 +23,8 @@ function App() {
    */
   function loadTasks() {
     console.log("loading tasks from local storage");
-    return JSON.parse(localStorage.getItem("tasks"))
+    return JSON.parse(localStorage.getItem("tasks"));
   }
-
 
   /**
    * Add a new task
@@ -46,7 +45,7 @@ function App() {
     if (window.confirm("delete all tasks?")) {
       setTasks([]);
     }
-  }
+  };
 
   const editTask = (taskToEdit) => {
     const tIndex = tasks.findIndex(({ id }) => id === taskToEdit.id);
@@ -70,10 +69,22 @@ function App() {
   return (
     <>
       <MainHeader />
-
       {/* temp reset button, move to where it's needed */}
-      <button onClick={removeTask_all}>reset</button>
-
+      <button
+        onClick={removeTask_all}
+        style={{
+          background: "#fff",
+          color: "#4a4a4a",
+          padding: "8px 12px",
+          border: "1px solid #4a4a4a",
+          borderRadius: "4px",
+          cursor: "pointer",
+          fontSize: "0.8rem",
+          margin: "10px 0 10px 20px",
+        }}
+      >
+        reset
+      </button>
       <div className="sort-controls">
         <label htmlFor="sort">Sort By:</label>
         <select
@@ -89,14 +100,19 @@ function App() {
           <option value="dueDate">Due Date</option>
         </select>
       </div>
-      <FontAwesomeIcon icon="fa-solid fa-face-smile" />// just to check fontawesome is working 
-
+      {/*
+      <FontAwesomeIcon icon="fa-solid fa-face-smile" />
+      // just to check fontawesome is working
+      */}
       <main id="main">
         <CreateTask onAddContact={addTask} />
-        <TaskList tasks={tasks} onEditTask={editTask} onRemoveTask={removeTask} />
+        <TaskList
+          tasks={tasks}
+          onEditTask={editTask}
+          onRemoveTask={removeTask}
+        />
       </main>
       <MainFooter />
-      
     </>
   );
 }
