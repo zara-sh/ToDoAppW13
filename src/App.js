@@ -81,7 +81,28 @@ function App() {
         case 'createTask':
           return <CreateTask onAddContact={addTask} />;
         case 'taskList':
-          return <TaskList tasks={tasks} onEditTask={editTask} onRemoveTask={removeTask} />;
+          return (
+            <>
+            <button onClick={removeTask_all}>reset</button>
+      
+            <div className="sort-controls">
+              <label htmlFor="sort">Sort By:</label>
+              <select
+                id="sort"
+                value={sortCriteria}
+                onChange={(e) => {
+                  setSortCriteria(e.target.value);
+                  sortTasks(e.target.value);
+                }}
+              >
+                <option value="">Select</option>
+                <option value="created">Creation Date</option>
+                <option value="dueDate">Due Date</option>
+              </select>
+            </div>
+            <TaskList tasks={tasks} onEditTask={editTask} onRemoveTask={removeTask} />
+            </>
+          );
         default:
           return null;
       }
@@ -91,24 +112,7 @@ function App() {
     <>
       <MainHeader dis={handleDisplayComp}  />
 
-      {/* temp reset button, move to where it's needed */}
-      <button onClick={removeTask_all}>reset</button>
-
-      <div className="sort-controls">
-        <label htmlFor="sort">Sort By:</label>
-        <select
-          id="sort"
-          value={sortCriteria}
-          onChange={(e) => {
-            setSortCriteria(e.target.value);
-            sortTasks(e.target.value);
-          }}
-        >
-          <option value="">Select</option>
-          <option value="created">Creation Date</option>
-          <option value="dueDate">Due Date</option>
-        </select>
-      </div>
+      
       {/* <FontAwesomeIcon icon="fa-solid fa-face-smile" />// just to check fontawesome is working  */}
 
       <main id="main">
