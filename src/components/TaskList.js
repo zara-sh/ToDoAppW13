@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 const TaskList = ({ tasks, onEditTask, onRemoveTask }) => {
-  const [editingTask, setEditingTask] = useState(null);  // State to track the task being edited
+  const [editingTask, setEditingTask] = useState(null); // State to track the task being edited
   const [editValues, setEditValues] = useState({
     name: "",
     description: "",
@@ -40,11 +40,11 @@ const TaskList = ({ tasks, onEditTask, onRemoveTask }) => {
     const { name, value } = dom.target;
     task = {
       ...task,
-      [name]: value
-    }
+      [name]: value,
+    };
     // console.log(task);
     onEditTask(task);
-  }
+  };
 
   // Function to save the edited task
   const handleSave = (task) => {
@@ -86,8 +86,8 @@ const TaskList = ({ tasks, onEditTask, onRemoveTask }) => {
       dueDate: editValues.dueDate,
       assignedTo: editValues.assignedTo,
     };
-    onEditTask(updatedTask);  // Call onEditTask to update the task in the list
-    setEditingTask(null);      // Close the edit form
+    onEditTask(updatedTask); // Call onEditTask to update the task in the list
+    setEditingTask(null); // Close the edit form
   };
 
   return (
@@ -97,14 +97,18 @@ const TaskList = ({ tasks, onEditTask, onRemoveTask }) => {
           {editingTask === task.id ? (
             // If the task is being edited, show an input form
             <div>
-              <span>Task Name: </span><input
+              <span>Task Name: </span>
+              <input
                 type="text"
                 name="name"
                 value={editValues.name}
                 onChange={handleInputChange}
                 placeholder="Task Name"
-              /><br />
-              <span>Description: </span><br /><textarea
+              />
+              <br />
+              <span>Description: </span>
+              <br />
+              <textarea
                 type="text"
                 name="description"
                 value={editValues.description}
@@ -112,41 +116,53 @@ const TaskList = ({ tasks, onEditTask, onRemoveTask }) => {
                 placeholder="Task Description"
                 cols="60"
                 rows="5"
-              /><br />
-              <span>Due Date: </span><input
+              />
+              <br />
+              <span>Due Date: </span>
+              <input
                 type="date"
                 name="dueDate"
                 value={editValues.dueDate}
                 onChange={handleInputChange}
-              /><br />
-              <span>Assigned To: </span><input 
+              />
+              <br />
+              <span>Assigned To: </span>
+              <input
                 type="text"
                 name="assignedTo"
                 value={editValues.assignedTo}
                 onChange={handleInputChange}
-              /><br />
+              />
+              <br />
               {error && <p className="error-message">{error}</p>}
               <button onClick={() => handleSave(task)}>Save</button>
               <button onClick={() => setEditingTask(null)}>Cancel</button>
             </div>
           ) : (
             // Otherwise, display task details and Edit/Remove buttons
-            <div>
+            <div className="card">
               <h3>{task.name}</h3>
               <h5>Due by: {task.dueDate}</h5>
               <p>Assigned to: {task.assignedTo}</p>
-              <p>Status:
+              <p>
+                Status:
                 <select
                   name="status"
                   value={task.status}
-                  onChange={(dom) => {handleInputChange_immediate(dom, task)}}
+                  onChange={(dom) => {
+                    handleInputChange_immediate(dom, task);
+                  }}
                 >
                   <option value="in progress">In Progress</option>
                   <option value="completed">Completed</option>
                   <option value="review">Review</option>
                 </select>
               </p>
-              <p>Description:<br />{task.description}</p>
+              <p>
+                Description:
+                <br />
+                {task.description}
+              </p>
               <button onClick={() => startEditing(task)}>Edit</button>
               <button onClick={() => onRemoveTask(task)}>Delete</button>
             </div>
