@@ -5,7 +5,7 @@ body {
   color: #4a4a4a;
 }
 
-/* task list css */
+/* create new task */
 
 form {
   padding: 20px;
@@ -37,7 +37,6 @@ select {
 
 .error-message {
   color: #da0c4a;
-  font-weight: bold;
 }
 
 button[type="submit"] {
@@ -53,6 +52,92 @@ button[type="submit"] {
 
 button:hover[type="submit"] {
   background-color: #0a3c86;
+}
+
+button[type="removeTask_all"] {
+  background-color: #fff;
+  color: #4a4a4a;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 10px 0 0 20px;
+}
+
+/* sort controls */
+.sort-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 200px;
+  margin: 0 20px 10px auto;
+  align-items: flex-end;
+}
+
+.sort-controls label {
+  font-weight: bold;
+  color: #4a4a4a;
+  font-size: 14px;
+}
+
+.sort-controls select {
+  padding: 6px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  color: #4a4a4a;
+  cursor: pointer;
+}
+
+.sort-controls select:hover {
+  border-color: #0c4ada;
+}
+
+/*task list*/
+
+.card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  width: calc(50% - 20px);
+  box-sizing: border-box;
+  margin: 60px 0px 0px 20px;
+}
+
+/* Edit button */
+.card button:first-of-type {
+  background-color: #0c4ada;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.card button:first-of-type:hover {
+  background-color: #0a3c86;
+}
+
+/* Delete*/
+.card button:last-of-type {
+  background-color: #cccccc;
+  color: #4a4a4a;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.card button:last-of-type:hover {
+  background-color: #aaaaaa;
+}
+
+.soft-controls {
+  margin-bottom: 20px;
 }
 
 .App {
