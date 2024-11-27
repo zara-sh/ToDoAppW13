@@ -24,12 +24,8 @@
 		justify-content: center;
 	}
 }
-
-footer-credit ul li {
-	position: relative;
-  }
   
-  #footer-credit ul li:not(:last-child)::after {
+#footer-credit ul li:not(:last-child)::after {
 	content: "|"; /* Add pipe separator */
 	margin-left: 0.5em; /* Space after the item */
 	color: var(--col-main-dark-text, white);
