@@ -6,11 +6,11 @@ const TaskList = ({ tasks, onEditTask, onRemoveTask }) => {
     name: "",
     description: "",
   });
-  const [error, setError] = useState("");
+  const [error, setError] = useState([]);
 
   // reset error message on editor opening & closing
   useEffect(() => {
-    setError("");
+    setError([]);
   }, [editingTask]);
 
   // Function to start editing a task
@@ -53,14 +53,16 @@ const TaskList = ({ tasks, onEditTask, onRemoveTask }) => {
      * mostly copied from CreateTask
      * starting to think this should be a separate function
      */
-    if (!editValues.name || !editValues.description || !editValues.dueDate) {
-      setError("All fields are required!");
-      return;
+
+    // prep to collect error
+    let errorAry = [];
+
+    if (!editValues.name) {
+      errorAry.push("Task name must be set.");
     }
 
     if (editValues.description.length < 5) {
-      setError("description too short");
-      return;
+      errorAry.push("Description must be at least 5 characters long.");
     }
 
     const dDate = new Date(editValues.dueDate);
@@ -68,15 +70,22 @@ const TaskList = ({ tasks, onEditTask, onRemoveTask }) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Set time to midnight to compare only dates
 
-    // failing fast for NaN
-    if (isNaN(dDate.getTime())) {
-      setError("Due date must be a valid date");
-      return;
+    // failing fast for NaN and, somehow, not set
+    if (!editValues.dueDate || isNaN(dDate.getTime())) {
+      errorAry.push("Due date must be a valid date");
+    } else if (dDate < minDate && dDate < today) {
+       // compare with today or last due date
+      errorAry.push("Due date must be a valid date");
     }
-    // compare with today or last due date
-    if (dDate < minDate && dDate < today) {
-      setError("Due date must be after today or last due date");
+
+    // break/return when there's error
+    if (errorAry.length > 0) {
+      // console.log(errorAry);
+      setError(errorAry);
       return;
+    } else {
+      // clear otherwise, it might clear after value is set, but just to be safe
+      setError([]);
     }
 
     const updatedTask = {
@@ -125,7 +134,11 @@ const TaskList = ({ tasks, onEditTask, onRemoveTask }) => {
                 value={editValues.assignedTo}
                 onChange={handleInputChange}
               /><br />
-              {error && <p className="error-message">{error}</p>}
+              {error ? 
+                <ul>
+                  {error.map((msg) => (<li>{msg}</li>))}
+                </ul>
+                : null}
               <button onClick={() => handleSave(task)}>Save</button>
               <button onClick={() => setEditingTask(null)}>Cancel</button>
             </div>
