@@ -18,7 +18,7 @@ export default function MainFooter() {
       					</a> |
 					</li>
 					<li><a href="https://www.linkedin.com/in/zahra-shirazi1/" target="_blank" rel="noopener noreferrer" style={{ color: "white", textDecoration: "none" }}>
-						  zahra Shirazi
+						  Zahra Shirazi
       					</a> |</li>
 				</ul>
 			</div>
