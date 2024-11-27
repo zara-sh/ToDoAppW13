@@ -102,9 +102,9 @@ button[type="removeTask_all"] {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 15px;
-  width: calc(50% - 20px);
+  width: calc(60% - 20px);
   box-sizing: border-box;
-  margin: 60px 0px 0px 20px;
+  margin: 60px auto;
 }
 
 /* Edit button */
