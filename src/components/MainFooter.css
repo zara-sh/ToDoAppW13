@@ -1,7 +1,7 @@
 #footer {
 	padding: 1.5em 0;
 
-	background: var(--col-main-dark, darkblue);
+	background:#0c4ada;
 	color: var(--col-main-dark-text, white);
 
 	#footer-credit {
