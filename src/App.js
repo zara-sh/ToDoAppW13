@@ -25,8 +25,12 @@ function App() {
    * not using arrow function to use on above line and keep this function next to useEffect
    */
   function loadTasks() {
-    console.log("loading tasks from local storage");
-    return JSON.parse(localStorage.getItem("tasks"))
+    let r = JSON.parse(localStorage.getItem("tasks"));
+    if (!Array.isArray(r)) {
+      r = [];
+    }
+    console.log("result", r);
+    return r;
   }
 
 
